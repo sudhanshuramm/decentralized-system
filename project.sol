@@ -10,6 +10,7 @@ contract CentralizedVault {
 
     constructor() {
         owner = msg.sender;
+        isRegistered[owner] = true;
     }
 
     // Register a new user (only owner can register)
