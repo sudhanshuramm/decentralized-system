@@ -43,7 +43,9 @@ contract CentralizedVault {
         require(internalBalance[msg.sender] >= amount, "Insufficient balance");
 
         internalBalance[msg.sender] -= amount;
-        payable(msg.sender).transfer(amount);
+
+        (bool success, ) = payable(msg.sender).call{value: amount}("");
+        require(success, "ETH transfer failed");
     }
 
     // Get contract balance
